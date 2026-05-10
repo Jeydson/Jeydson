@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explorador de Sistemas Dinâmicos</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-theme="light">
+  <header class="header">
+    <div>
+      <h1>Explorador Interativo de Sistemas Dinâmicos</h1>
+      <p>Estudo de 2ª ordem: mecânico, elétrico e térmico com resposta temporal, fase e varredura em frequência.</p>
+    </div>
+    <button id="themeBtn" class="ghost">🌗 Tema</button>
+  </header>
+
+  <main class="layout">
+    <section class="panel controls">
+      <h2>Controles</h2>
+
+      <label>Domínio
+        <select id="domainSelect">
+          <option value="mechanical">Mecânico (massa-mola-amortecedor)</option>
+          <option value="electrical">Elétrico (RLC série)</option>
+          <option value="thermal">Térmico (massa térmica + perdas)</option>
+        </select>
+      </label>
+
+      <label>Regime
+        <select id="modeSelect">
+          <option value="free">Resposta livre</option>
+          <option value="forced">Resposta forçada senoidal</option>
+          <option value="step">Resposta ao degrau</option>
+        </select>
+      </label>
+
+      <label>Preset
+        <select id="presetSelect"></select>
+      </label>
+
+      <div id="paramContainer" class="grid"></div>
+
+      <fieldset>
+        <legend>Condições iniciais</legend>
+        <label>x(0)
+          <input id="x0" type="number" step="any" value="0.1" />
+        </label>
+        <label>ẋ(0)
+          <input id="v0" type="number" step="any" value="0" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Excitação</legend>
+        <label>Amplitude
+          <input id="amp" type="number" step="any" value="1" />
+        </label>
+        <label>Frequência ω [rad/s]
+          <input id="omega" type="number" step="any" value="1" />
+        </label>
+      </fieldset>
+
+      <label>Δt [s]
+        <input id="dt" type="number" min="0.001" step="0.001" value="0.016" />
+      </label>
+
+      <div class="btns">
+        <button id="playBtn">▶ Iniciar</button>
+        <button id="pauseBtn">⏸ Pausar</button>
+        <button id="resetBtn">↺ Resetar</button>
+      </div>
+    </section>
+
+    <section class="panel viz">
+      <h2>Visualização</h2>
+      <canvas id="simCanvas" width="860" height="220"></canvas>
+      <canvas id="timeCanvas" width="860" height="190"></canvas>
+      <canvas id="phaseCanvas" width="860" height="190"></canvas>
+      <canvas id="frfCanvas" width="860" height="190"></canvas>
+    </section>
+
+    <section class="panel theory">
+      <h2>Teoria</h2>
+      <div id="theoryText"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
